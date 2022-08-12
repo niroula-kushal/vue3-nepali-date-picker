@@ -1,15 +1,15 @@
 <template>
-<div class="wrapper">
-    <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue"/>
-    <slot v-if="allowClear" :on-clear="onClear" name="clear-btn">
-        <span  class="clear-btn" @click.prevent="onClear">
-            X
-        </span>
-    </slot>
-</div>
+    <div class="wrapper">
+        <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue" />
+        <slot v-if="allowClear" :on-clear="onClear" name="clear-btn">
+            <span class="clear-btn" @click.prevent="onClear">
+                X
+            </span>
+        </slot>
+    </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 
 import NepaliFunctions from '../nepali-date-picker/NepaliFunctions.js';
 import '../nepali-date-picker/nepali-date-picker.js';
@@ -36,6 +36,18 @@ const emit = defineEmits<{
 
 const elm = ref<HTMLElement | null>(null);
 
+const changeableProps = computed(() => ({
+    allowedPastDays: props.allowedPastDays,
+    yearSelect: props.yearSelect,
+    monthSelect: props.monthSelect,
+    yearCount: props.yearCount,
+    nepaliDateFormat: props.nepaliDateFormat,
+    allowedFutureDays: props.allowedFutureDays,
+    min: props.min,
+    max: props.max,
+    language: props.language
+}));
+
 const nepaliDateFormat = computed<string>(() => props.nepaliDateFormat ?? "MM/DD/YYYY");
 
 const dateValue = computed<string>(() => convertAdDateToFormattedBsDate(props.modelValue));
@@ -44,9 +56,9 @@ const onClear = () => {
     emit("update:modelValue", null);
 };
 
-function convertAdDateToFormattedBsDate(date: Date | null | undefined){
-    if(date === null || date === undefined) return "";
-     // @ts-ignore
+function convertAdDateToFormattedBsDate(date: Date | null | undefined) {
+    if (date === null || date === undefined) return "";
+    // @ts-ignore
     const dateObj = NepaliFunctions.AD2BS({
         year: date.getFullYear(),
         month: date.getMonth() + 1,
@@ -55,7 +67,12 @@ function convertAdDateToFormattedBsDate(date: Date | null | undefined){
     return NepaliFunctions.ConvertDateFormat(dateObj, nepaliDateFormat.value);
 }
 
-onMounted(() => {
+onMounted(initializeDatePicker);
+watch(() => changeableProps.value, () => {
+    initializeDatePicker();
+});
+
+function initializeDatePicker() {
     // @ts-ignore
     elm.value.nepaliDatePicker({
         dateFormat: nepaliDateFormat.value,
@@ -68,11 +85,11 @@ onMounted(() => {
         disableDaysAfter: props.allowedPastDays ?? -1,
         readOnlyInput: true,
         language: props.language,
-        onChange(date: {ad: string,bs:string}) {
+        onChange(date: { ad: string, bs: string }) {
             emit("update:modelValue", new Date(date.ad));
         }
     });
-});
+};
 
 </script>
 
@@ -80,9 +97,11 @@ onMounted(() => {
 .wrapper {
     position: relative;
 }
+
 .wrapper input {
     width: 100%;
 }
+
 .clear-btn {
     position: absolute;
     right: 0;
