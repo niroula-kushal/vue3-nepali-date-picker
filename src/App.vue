@@ -52,6 +52,8 @@ const usage = computed<string>(() => {
 <template>
   <div class="grid">
     <div class="sidebar">
+      <h1 class="mb-0">Props</h1>
+      <hr>
       <p>
         Allow Clear: <input type="checkbox" v-model="allowClear">
         <br/>
@@ -164,6 +166,23 @@ const usage = computed<string>(() => {
           </strong>
         </small>
       </p>
+
+      <h1 class="mb-0">
+        Slots
+      </h1>
+      <hr/>
+      #clear-btn {onClear : () => void} <br/>
+      <small>
+        Slot to render custom clear button [OPTIONAL]. <br/>
+         Call onClear to clear date
+      </small>
+      <textarea readonly rows="10" class="w-full">
+        <template #clear-btn="{onClear}">
+            <span class="clear-btn" @click.prevent="onClear">
+                ❌
+            </span>
+          </template>
+      </textarea>
     </div>
     <div class="content">
         <VNepaliDatePicker v-model="date" 
@@ -230,6 +249,8 @@ const usage = computed<string>(() => {
 .w-full {
   width: 100%;
 }
+
+.mb-0 { margin-bottom: 0;}
 
 @media screen and (max-width: 720px) {
   .grid {
