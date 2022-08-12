@@ -26,7 +26,8 @@ const props = defineProps<{
     min?: Date | null,
     max?: Date | null,
     allowedPastDays?: number,
-    allowedFutureDays?: number
+    allowedFutureDays?: number,
+    language?: "english" | "nepali"
 }>();
 
 const emit = defineEmits<{
@@ -66,6 +67,7 @@ onMounted(() => {
         disableDaysBefore: props.allowedPastDays ?? -1,
         disableDaysAfter: props.allowedPastDays ?? -1,
         readOnlyInput: true,
+        language: props.language,
         onChange(date: {ad: string,bs:string}) {
             emit("update:modelValue", new Date(date.ad));
         }

@@ -6,7 +6,7 @@ const max = ref<Date | null>(new Date());
 </script>
 
 <template>
-  <VNepaliDatePicker v-model="date" :allow-clear="true" :year-select="true" :month-select="true" :max="max" :allowed-past-days="5">
+  <VNepaliDatePicker v-model="date" :allow-clear="true" :year-select="true" :month-select="true" :max="max" :allowed-past-days="5" language="english">
   <template #clear-btn="{onClear}">
     <span class="clear-btn" @click.prevent="onClear">
         ❌
