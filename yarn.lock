@@ -12,11 +12,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.14.54.tgz#de2a4be678bd4d0d1ffbb86e6de779cde5999028"
   integrity sha512-bZBrLAIX1kpWelV0XemxBZllyRmM6vgFQQG2GdNb+r3Fkp0FOh1NJSvekXDs7jq70k4euu1cryLMfU+mTXlEpw==
 
-"@sajanm/nepali-date-picker@^3.7.0":
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/@sajanm/nepali-date-picker/-/nepali-date-picker-3.7.0.tgz#4f0d6774ed4aeeff7dd60b2d0a2f8069868526a1"
-  integrity sha512-CgAVVik2wgPT7l0qUiB/CcEaPUigYCY+9+o08g/bn/wHWZpHRp3nhEkz9gUq3I2dogWzBFip0cbzAtJTQTQ24g==
-
 "@vitejs/plugin-vue@^3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-3.0.2.tgz#a4ba2d3b8a6a104fe90f1357020339b9a3304883"

@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sajanm/nepali-date-picker": "^3.7.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {
