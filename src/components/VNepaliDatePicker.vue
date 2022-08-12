@@ -24,7 +24,9 @@ const props = defineProps<{
     monthSelect?: boolean,
     yearCount?: number,
     min?: Date | null,
-    max?: Date | null
+    max?: Date | null,
+    allowedPastDays?: number,
+    allowedFutureDays?: number
 }>();
 
 const emit = defineEmits<{
@@ -61,6 +63,8 @@ onMounted(() => {
         ndpYearCount: props.yearCount ?? 10,
         disableBefore: convertAdDateToFormattedBsDate(props.min),
         disableAfter: convertAdDateToFormattedBsDate(props.max),
+        disableDaysBefore: props.allowedPastDays ?? -1,
+        disableDaysAfter: props.allowedPastDays ?? -1,
         readOnlyInput: true,
         onChange(date: {ad: string,bs:string}) {
             emit("update:modelValue", new Date(date.ad));
