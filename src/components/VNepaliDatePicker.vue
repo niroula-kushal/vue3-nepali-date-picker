@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue" />
+        <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue" :class="inputClasses"/>
         <slot v-if="allowClear" :on-clear="onClear" name="clear-btn">
             <span class="clear-btn" @click.prevent="onClear">
                 X
@@ -11,15 +11,18 @@
 <script lang="ts" setup>
 import { onMounted, ref, computed, watch } from 'vue';
 
+// @ts-ignore
 import NepaliFunctions from '../nepali-date-picker/NepaliFunctions.js';
 import '../nepali-date-picker/nepali-date-picker.js';
 import '../nepali-date-picker/nepali-date-picker.css';
 
+export type DatePickerLangauges =  "english" | "nepali";
 
 const props = defineProps<{
     modelValue: Date | null,
-    nepaliDateFormat?: string,
     allowClear?: boolean,
+    inputClasses?:string,
+    nepaliDateFormat?: string,
     yearSelect?: boolean,
     monthSelect?: boolean,
     yearCount?: number,
@@ -27,7 +30,7 @@ const props = defineProps<{
     max?: Date | null,
     allowedPastDays?: number,
     allowedFutureDays?: number,
-    language?: "english" | "nepali"
+    language?: DatePickerLangauges
 }>();
 
 const emit = defineEmits<{
@@ -82,7 +85,7 @@ function initializeDatePicker() {
         disableBefore: convertAdDateToFormattedBsDate(props.min),
         disableAfter: convertAdDateToFormattedBsDate(props.max),
         disableDaysBefore: props.allowedPastDays ?? -1,
-        disableDaysAfter: props.allowedPastDays ?? -1,
+        disableDaysAfter: props.allowedFutureDays ?? -1,
         readOnlyInput: true,
         language: props.language,
         onChange(date: { ad: string, bs: string }) {
