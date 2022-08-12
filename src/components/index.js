@@ -1,0 +1,1 @@
+export {default as VNepaliDatePicker} from './VNepaliDatePicker.vue';
