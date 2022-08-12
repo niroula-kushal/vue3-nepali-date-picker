@@ -33,8 +33,8 @@ const usage = computed<string>(() => {
           :year-select="${yearSelect.value}"
           :month-select="${monthSelect.value}"
           :year-count="${yearCount.value}"
-          :max="new Date("${max.value.getFullYear()}-${max.value.getMonth()+1}-${max.value.getDate()}")" 
-          :min="new Date("${min.value.getFullYear()}-${min.value.getMonth()+1}-${min.value.getDate()}")" 
+          :max="new Date("${max.value.getFullYear()}-${max.value.getMonth()+1}-${max.value.getDate()}")" // a date instance
+          :min="new Date("${min.value.getFullYear()}-${min.value.getMonth()+1}-${min.value.getDate()}")" // a date instance
           :language="${language.value}"
         >
           <template #clear-btn="{onClear}">
@@ -54,38 +54,102 @@ const usage = computed<string>(() => {
     <div class="sidebar">
       <p>
         Allow Clear: <input type="checkbox" v-model="allowClear">
+        <br/>
+        <small>Allow/disallow clearing selected value. If allowClear is true, the returned date may be null. 
+          <strong>
+            Default: false
+          </strong>
+        </small>
       </p>
       
       <p>
         Year Select: <input type="checkbox" v-model="yearSelect">
+        <br/>
+        <small>Show/hide year select
+          <strong>
+            Default: false
+          </strong>
+        </small>
       </p>
       <p>
         Month Select: <input type="checkbox" v-model="monthSelect">
+        <br/>
+        <small>Show/hide month select
+          <strong>
+            Default: false
+          </strong>
+        </small>
       </p>
       <p>
         Input Classes
         <input type="text" v-model="inputClasses" class="w-full">
+        <br/>
+        <small>Extra classes to add to input element.
+
+          <strong>
+            Default: ""
+          </strong>
+
+        </small>
       </p>
       <p>
         Nepali Date Format
         <input type="text" v-model="inputDateFormat" class="w-full">
+        <br/>
+        <small>The format of the date shown in the input.
+
+          <strong> Default: "YYYY-MM-DD" </strong>
+        </small>
+
       </p>
       <p>
         Year Count: <input type="number" v-model="yearCount" class="w-full">
+        <br/>
+        <small>Number of years to show in year select. Applicable only when yearSelect is true.
+          <strong>
+            Default: 10
+          </strong>
+        </small>
       </p>
       <p>
         Min Date: <input type="date" v-model="minDateValue" class="w-full">
+        <br/>
+        <small>The min date allowed.
+          <strong>
+            Default: null for no restriction
+          </strong>
+        </small>
       </p>
       <p>
         Max Date: <input type="date" v-model="maxDateValue" class="w-full">
+        <br/>
+        <small>The max date allowed
+          <strong>
+            Default: null for no restriction
+          </strong>
+        </small>
       </p>
       <p>
         Allowed Past Days
         <input type="number" step="1" v-model="allowedPastDays" class="w-full">
+        <br/>
+        <small>The max past days allowed.
+
+          <strong>
+            Default: -1 for no restriction
+          </strong>
+        </small>
       </p>
       <p>
         Allowed Future Days
         <input type="number" step="1" v-model="allowedFutureDays" class="w-full">
+        <br/>
+        <small>The max future days allowed.
+          <strong>
+            Default: -1 for no restriction
+          </strong>
+
+        </small>
       </p>
       <p>
         Language
@@ -93,6 +157,12 @@ const usage = computed<string>(() => {
           <option>english</option>
           <option>nepali</option>
         </select>
+        <br/>
+        <small>The language used to show calendar
+          <strong>
+             Default: nepali
+          </strong>
+        </small>
       </p>
     </div>
     <div class="content">
@@ -145,8 +215,10 @@ const usage = computed<string>(() => {
   background-color: rgb(210 210 210);
   box-shadow: 1px 2px 6px rgba(0,0,0, .3);
   border-radius: 25px;
-  height: 100%;
+  max-height: 90vh;
+  overflow: auto;
   padding: 20px;
+  align-self: center;
 }
 
 .content {
@@ -162,9 +234,11 @@ const usage = computed<string>(() => {
 @media screen and (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: minmax(100vh, 1fr);
   }
   .sidebar {
     height: auto;
+    min-height: max-content;
   }
   .content {
     grid-row-start: 2;
