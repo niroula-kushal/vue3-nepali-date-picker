@@ -81,6 +81,7 @@ import NepaliFunctions from "./NepaliFunctions";
             day: NepaliFunctions.GetDaysInBsMonth(M, Y)
         }) && (F = !1);
         var T = document.createElement("SPAN");
+        T.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"/></svg>`;
         T.setAttribute("class", "ndc-chevron ndc-left");
         var S = document.createElement("A");
         S.setAttribute("id", "prev"), S.setAttribute("title", "Previous Month"), S.setAttribute("class", F ? "ndp-prev" : "ndp-prev ndp-disabled"), S.setAttribute("href", "javascript:void(0)"), S.appendChild(T), F && S.addEventListener("click", function() {
@@ -93,6 +94,7 @@ import NepaliFunctions from "./NepaliFunctions";
             day: 1
         }, d.disableAfter) && (I = !1);
         var x = document.createElement("SPAN");
+        x.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"/></svg>`;
         x.setAttribute("class", "ndc-chevron ndc-right");
         var G = document.createElement("A");
         G.setAttribute("id", "next"), G.setAttribute("title", "Next Month"), G.setAttribute("class", I ? "ndp-next" : "ndp-next ndp-disabled"), G.setAttribute("href", "javascript:void(0)"), G.appendChild(x), I && G.addEventListener("click", function() {
