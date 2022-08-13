@@ -2,7 +2,9 @@
 import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
 import VNepaliDatePicker, { DatePickerLangauges } from './components/VNepaliDatePicker.vue';
+
 const date = ref<Date | null>(new Date());
+const nepaliDate = ref<string|null>("");
 
 const minDateValue = ref<string>("2020-01-01");
 const maxDateValue = ref<string>("2023-01-01");
@@ -23,8 +25,9 @@ const language = ref<DatePickerLangauges>("nepali");
 const usage = computed<string>(() => {
   let str = `
       const date = ref<Date | null>(new Date());
+      const nepaliDate = ref<string | null>("");
 
-      <VNepaliDatePicker v-model="date" 
+      <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
           :allow-clear="${allowClear.value}" 
           :allowed-past-days="${allowedPastDays.value}" 
           :allowed-future-days="${allowedFutureDays.value}" 
@@ -185,7 +188,7 @@ const usage = computed<string>(() => {
       </textarea>
     </div>
     <div class="content">
-        <VNepaliDatePicker v-model="date" 
+        <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
           :allow-clear="allowClear" 
           :allowed-past-days="allowedPastDays" 
           :allowed-future-days="allowedFutureDays" 
@@ -205,7 +208,8 @@ const usage = computed<string>(() => {
           </template>
         </VNepaliDatePicker>
         <h3>
-          Selected Date: {{date?.toDateString()}}
+          Selected Date: {{date?.toDateString()}} AD <br/>
+          Nepali Date: {{nepaliDate}} BS
         </h3>
         <hr/>
         <textarea readonly v-model="usage" class="w-full" rows="30">

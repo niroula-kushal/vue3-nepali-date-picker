@@ -20,6 +20,7 @@ export type DatePickerLangauges =  "english" | "nepali";
 
 const props = defineProps<{
     modelValue: Date | null,
+    nepaliDate?: string | null,
     allowClear?: boolean,
     inputClasses?:string,
     nepaliDateFormat?: string,
@@ -34,7 +35,8 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-    (e: "update:modelValue", value: Date | null): void
+    (e: "update:modelValue", value: Date | null): void,
+    (e: "update:nepaliDate", value:string|null):void
 }>();
 
 const elm = ref<HTMLElement | null>(null);
@@ -70,9 +72,21 @@ function convertAdDateToFormattedBsDate(date: Date | null | undefined) {
     return NepaliFunctions.ConvertDateFormat(dateObj, nepaliDateFormat.value);
 }
 
-onMounted(initializeDatePicker);
+function emitNepaliDate(value: string|null) {
+    emit("update:nepaliDate", value);
+}
+
 watch(() => changeableProps.value, () => {
     initializeDatePicker();
+});
+
+watch(() => dateValue.value, (value) => {
+    emitNepaliDate(value);
+})
+
+onMounted(() => {
+    initializeDatePicker();
+    emitNepaliDate(dateValue.value);
 });
 
 function initializeDatePicker() {
