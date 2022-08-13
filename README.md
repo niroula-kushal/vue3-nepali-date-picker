@@ -9,7 +9,7 @@ Vue 3 Nepali Date Picker is a lightweight wrapper around [Nepali Date Picker](ht
 ## Installation
 
 ```bash
-npm i vue-nepali-date-picker 
+npm i vue-nepali-date-picker
 
 OR
 
@@ -50,7 +50,7 @@ import VNepaliDatePicker from 'vue-nepali-date-picker';
 
 ## Props
 
-> Props documentation WIP
+> View Props usage documentation at [Docs](https://vue-nepali-date-picker.netlify.app/)
 
 ## Handling of [Nepali Date Picker - https://github.com/sajanm/nepali-date-picker.git](https://github.com/sajanm/nepali-date-picker.git)
 
