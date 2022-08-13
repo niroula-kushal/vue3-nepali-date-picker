@@ -23,11 +23,13 @@ Vue 3 Nepali Date Picker is a lightweight wrapper around [Nepali Date Picker](ht
 
 ## Installation
 
+> npm
 ```bash
 npm i vue-nepali-date-picker
+```
 
-OR
-
+> yarn
+```bash
 yarn add vue-nepali-date-picker
 ```
 
