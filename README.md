@@ -15,6 +15,11 @@ Vue 3 Nepali Date Picker is a lightweight wrapper around [Nepali Date Picker](ht
 
 ![image](https://user-images.githubusercontent.com/28915667/184473243-fc6968d1-a834-4ceb-9d2b-327322f7136f.png)
 
+> English Language
+
+![image](https://user-images.githubusercontent.com/28915667/184474041-469130c6-a222-45f4-bfea-6e3458c1cf30.png)
+
+
 > Code Sandbox: https://codesandbox.io/s/vue-nepali-date-picker-playground-br3cuu
 
 ## Dependencies
