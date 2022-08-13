@@ -50,7 +50,7 @@ import VNepaliDatePicker from 'vue-nepali-date-picker';
 
 ## Props
 
-View demo at ....
+> Props documentation WIP
 
 ## Handling of [Nepali Date Picker - https://github.com/sajanm/nepali-date-picker.git](https://github.com/sajanm/nepali-date-picker.git)
 
