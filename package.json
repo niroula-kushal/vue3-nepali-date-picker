@@ -1,8 +1,12 @@
 {
-  "name": "vnepalidatepicker",
-  "private": true,
-  "version": "0.0.0",
+  "name": "vue-nepali-date-picker",
+  "version": "0.0.1",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/v-nepali-date-picker.umd.js",
+  "module": "./dist/v-nepali-date-picker.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

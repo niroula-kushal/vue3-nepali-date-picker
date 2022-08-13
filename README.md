@@ -1,6 +1,65 @@
-# Vue 3 + TypeScript + Vite
+# Vue3 Nepali Date Picker
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Vue 3 Nepali Date Picker is a lightweight wrapper around [Nepali Date Picker](https://github.com/sajanm/nepali-date-picker.git) by [@Sajanm](https://github.com/sajanm). It provides an elegant UI for the end users to input nepali date.
+
+## Dependencies
+
+- [Vue](https://vuejs.org) : This library is directly depended on Vue3
+
+## Installation
+
+```bash
+npm i vue-nepali-date-picker 
+
+OR
+
+yarn add vue-nepali-date-picker
+```
+
+## Basic Usage
+1. Inject the styles, preferabbly in App.vue
+
+```js
+import 'vue-nepali-date-picker/dist/style.css';
+```
+2. Import component and use it in your app
+```js
+
+import VNepaliDatePicker from 'vue-nepali-date-picker';
+...
+<VNepaliDatePicker v-model="date" 
+          :allow-clear="allowClear" 
+          :allowed-past-days="allowedPastDays" 
+          :allowed-future-days="allowedFutureDays" 
+          :input-classes="inputClasses"
+          :nepali-date-format="inputDateFormat"
+          :year-select="yearSelect"
+          :month-select="monthSelect"
+          :year-count="yearCount"
+          :max="max" 
+          :min="min"
+          :language="language"
+        >
+          <template #clear-btn="{onClear}">
+            <span class="clear-btn" @click.prevent="onClear">
+                ❌
+            </span>
+          </template>
+        </VNepaliDatePicker>
+```
+
+## Props
+
+View demo at ....
+
+## Handling of [Nepali Date Picker - https://github.com/sajanm/nepali-date-picker.git](https://github.com/sajanm/nepali-date-picker.git)
+
+There were some issues with using the package as is. The package does not provide source code and just provides a minified version of js and css. We needed to make some changes to the files there as the current files were not compatible with our usage.
+
+So the minified version of the source code were unminified and then placed in this repository with minor adjustments. This is purely to make sure this library works and there is no ill intent here.
+
+Huge props to the library for making this possible.
+
 
 ## Recommended IDE Setup
 
