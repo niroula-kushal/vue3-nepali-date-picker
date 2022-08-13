@@ -9,9 +9,11 @@ div#ndp-nepali-box{
     padding:1px;
     box-shadow:0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12)
 }
+
 div#ndp-nepali-box .hidden{
     display:none
 }
+
 div#ndp-table-div{
     margin:0
 }
@@ -21,20 +23,15 @@ div#ndp-table-div table{
 }
 div#ndp-nepali-box td.ndp-date{
     padding:2px;
-    border:1px solid #c5dbec;
-    background:#dfeffc;
-    color:#2e6e9e
+    color: #000;
 }
-div#ndp-nepali-box td.ndp-selected{
-    border:1px solid #fad42e;
-    background:#fbec88;
-    color:#363636;
-    text-align:center
+div#ndp-nepali-box td.ndp-selected > a{
+    background:#EFF6FF;
+    color:#1D4ED8;
+    text-align:center;
 }
-div#ndp-nepali-box td.ndp-current{
-    padding:2px;
-    border:1px solid #fed22f;
-    background:#f5f8f9;
+div#ndp-nepali-box td.ndp-current > a {
+    background:#ced4da;
     text-align:center;
     font-weight:700
 }
@@ -42,24 +39,26 @@ div#ndp-nepali-box td.ndp-current a{
     color:#e17009;
     display:block
 }
+
 div#ndp-nepali-box td.ndp-date a,div#ndp-nepali-box td.ndp-selected a{
     display:block;
-    color:#1c94c4;
+    color: #495057;
     text-decoration:none;
-    width:20px;
     text-align:center;
     font-weight:700;
 }
 a.ndp-disabled{
     color:#ccc!important
 }
-div#ndp-nepali-box td.ndp-current:hover,div#ndp-nepali-box td.ndp-date:hover{
-    border:1px solid #fed22f;
-    opacity:.8
+
+div#ndp-nepali-box td.ndp-date:hover > a{
+    background-color: #e9ecef;
 }
+
 div#ndp-nepali-box td.ndp-date a:hover{
     color:#1c94c4
 }
+
 div#ndp-nepali-box table,div#ndp-nepali-box td,div#ndp-nepali-box tr{
     font-size:12px;
     height:19px;
@@ -67,13 +66,16 @@ div#ndp-nepali-box table,div#ndp-nepali-box td,div#ndp-nepali-box tr{
     border-collapse:separate;
     border-spacing:2px
 }
-div#ndp-nepali-box a{
-    text-decoration:none
+
+div#ndp-nepali-box a {
+    text-decoration:none;
 }
+
 .ndp-days th,.ndp-header{
     text-align:center;
     font-weight:700
 }
+
 .ndp-header{
     font-size:13px;
     padding:0.5rem;
@@ -97,11 +99,10 @@ div#ndp-nepali-box a{
     width: 10px;
 }
 
-#prev{
+#prev {
     left:7px;
     order: -1;
 }
-
 
 #next{
     order: 10;
@@ -110,4 +111,14 @@ div#ndp-nepali-box a{
 
 #next.ndp-disabled,#prev.ndp-disabled{
     fill:#ccc;
+}
+
+.ndp-date > a, .ndp-selected > a , .ndp-current > a{
+    padding: 10px !important;
+    display: block;
+    border-radius: 50%;
+}
+
+.ndp-selected > a {
+    color: #1D4ED8 !important;
 }
