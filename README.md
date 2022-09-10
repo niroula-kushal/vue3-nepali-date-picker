@@ -47,9 +47,9 @@ import 'vue-nepali-date-picker/dist/style.css';
 2. Import component and use it in your app
 ```js
 
-import VNepaliDatePicker from 'vue-nepali-date-picker';
+import { VNepaliDatePicker } from 'vue-nepali-date-picker';
 ...
-<VNepaliDatePicker v-model="date" 
+<VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDateString"
           :allow-clear="allowClear" 
           :allowed-past-days="allowedPastDays" 
           :allowed-future-days="allowedFutureDays" 
