@@ -121,7 +121,7 @@ function initializeDatePicker() {
 
 .clear-btn {
     position: absolute;
-    right: 0;
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
     color: gray;
