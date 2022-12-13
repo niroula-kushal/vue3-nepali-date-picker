@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue" :class="inputClasses" :disabled="disabled"/>
-        <slot v-if="allowClear || !disabled" :on-clear="onClear" name="clear-btn">
+        <slot v-if="allowClear && !disabled" :on-clear="onClear" name="clear-btn">
             <span class="clear-btn" @click.prevent="onClear"
                 style="position: absolute;right: 5px;top: 50%;transform: translateY(-50%);color: gray;cursor: pointer;"
             >
