@@ -21,6 +21,7 @@ const monthSelect = ref<boolean>(false);
 const allowClear = ref<boolean>(true);
 const yearCount = ref<number>(10);
 const language = ref<DatePickerLangauges>("nepali");
+const disabled = ref(false);
 
 const usage = computed<string>(() => {
   let str = `
@@ -39,6 +40,7 @@ const usage = computed<string>(() => {
           :max="new Date("${max.value.getFullYear()}-${max.value.getMonth()+1}-${max.value.getDate()}")" // a date instance
           :min="new Date("${min.value.getFullYear()}-${min.value.getMonth()+1}-${min.value.getDate()}")" // a date instance
           :language="${language.value}"
+          :disabled="${disabled.value}"
         >
           <template #clear-btn="{onClear}">
             <span class="clear-btn" @click.prevent="onClear">
@@ -66,7 +68,15 @@ const usage = computed<string>(() => {
           </strong>
         </small>
       </p>
-      
+      <p>
+        Disabled: <input type="checkbox" v-model="disabled">
+        <br/>
+        <small>Disable the date picker
+          <strong>
+            Default: false
+          </strong>
+        </small>
+      </p>
       <p>
         Year Select: <input type="checkbox" v-model="yearSelect">
         <br/>
@@ -200,6 +210,7 @@ const usage = computed<string>(() => {
           :max="max" 
           :min="min"
           :language="language"
+    :disabled="disabled"
         >
           <template #clear-btn="{onClear}">
             <span class="clear-btn" @click.prevent="onClear">
