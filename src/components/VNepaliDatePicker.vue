@@ -2,10 +2,10 @@
     <div class="wrapper">
         <input type="text" placeholder="yyyy-mm-dd" ref="elm" :value="dateValue" :class="inputClasses" :disabled="disabled"/>
         <slot v-if="allowClear && !disabled" :on-clear="onClear" name="clear-btn">
-            <span class="clear-btn" @click.prevent="onClear"
-                style="position: absolute;right: 5px;top: 50%;transform: translateY(-50%);color: gray;cursor: pointer;"
-            >
-                X
+            <span class="clear-btn" @click.prevent="onClear">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+</svg>
             </span>
         </slot>
     </div>
@@ -129,5 +129,6 @@ function initializeDatePicker() {
     transform: translateY(-50%);
     color: gray;
     cursor: pointer;
+    
 }
 </style>
