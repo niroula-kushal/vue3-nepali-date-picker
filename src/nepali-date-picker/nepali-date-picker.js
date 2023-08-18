@@ -84,7 +84,8 @@ import NepaliFunctions from "./NepaliFunctions";
         T.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 480c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25l192-192c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l169.4 169.4c12.5 12.5 12.5 32.75 0 45.25C240.4 476.9 232.2 480 224 480z"/></svg>`;
         T.setAttribute("class", "ndc-chevron ndc-left");
         var S = document.createElement("A");
-        S.setAttribute("id", "prev"), S.setAttribute("title", "Previous Month"), S.setAttribute("class", F ? "ndp-prev" : "ndp-prev ndp-disabled"), S.setAttribute("href", "javascript:void(0)"), S.appendChild(T), F && S.addEventListener("click", function() {
+        S.setAttribute("id", "prev"), S.setAttribute("title", "Previous Month"), S.setAttribute("class", F ? "ndp-prev" : "ndp-prev ndp-disabled"), S.setAttribute("href", "javascript:void(0)"), S.appendChild(T), F &&
+        S.addEventListener("click", function() {
             i(M, Y, a)
         });
         var I = !0;
@@ -200,7 +201,9 @@ import NepaliFunctions from "./NepaliFunctions";
         var t = e.getAttribute("data-value"),
             n = b(),
             r = NepaliFunctions.ConvertToDateObject(t, n.dateFormat);
-        n.ndpEnglishInput && (document.getElementById(n.ndpEnglishInput).value = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BS2AD(r), n.dateFormat)), document.getElementById(E).value = n.unicodeDate ? NepaliFunctions.ConvertToUnicode(t) : t, n.onChange && n.onChange({
+        n.ndpEnglishInput && (document.getElementById(n.ndpEnglishInput).value = NepaliFunctions.ConvertDateFormat(NepaliFunctions.BS2AD(r), n.dateFormat)),
+            document.getElementById(E).value = n.unicodeDate ? NepaliFunctions.ConvertToUnicode(t) : t,
+        n.onChange && n.onChange({
             bs: t,
             ad: NepaliFunctions.ConvertDateFormat(NepaliFunctions.BS2AD(r), n.dateFormat),
             object: r
@@ -343,6 +346,21 @@ import NepaliFunctions from "./NepaliFunctions";
         B = !1,
         C = [],
         E = null;
+
+    function onDateInput(event, handler) {
+        let date = event.target.value;
+        const dateObj = NepaliFunctions.ConvertToDateObject(date, handler.dateFormat);
+        if(date?.split('-').length == 3){
+            handler.onChange({
+                bs: date,
+                ad: NepaliFunctions.ConvertDateFormat(NepaliFunctions.BS2AD(dateObj), handler.dateFormat),
+                object: r
+            });
+            const calendarDis = document.getElementById("ndp-nepali-box");
+            calendarDis && calendarDis.remove();
+        }
+    }
+
     Object.prototype.nepaliDatePicker = function(e) {
         function t(e) {
             e.classList.remove("ndp-nepali-calendar"), e.removeAttribute("ndp-calendar-data"), e.removeAttribute("readonly"), e.removeEventListener("focus", D), e.removeEventListener("mouseenter", n), e.removeEventListener("mouseleave", r), e.removeEventListener("keydown", N);
@@ -412,11 +430,11 @@ import NepaliFunctions from "./NepaliFunctions";
         function h(e) {
             v || (v = !0, m() ? a("toggleCalendar") : o(e), v = !1)
         }
-        var p = this;
+        var that = this;
         if ("remove" != e) {
-            if (e = void 0 === e ? {} : e, p.length && p.length > 0)
-                for (var f = 0; f < p.length; f++) s(p[f], e);
-            else s(p, e);
+            if (e = void 0 === e ? {} : e, that.length && that.length > 0)
+                for (var f = 0; f < that.length; f++) s(that[f], e);
+            else s(that, e);
             var y = document.querySelectorAll(".ndp-nepali-calendar");
             if (y.length > 0)
                 for (var f = 0; f < y.length; f++) y[f].addEventListener("mouseenter", n), y[f].addEventListener("mouseleave", r);
@@ -425,10 +443,18 @@ import NepaliFunctions from "./NepaliFunctions";
                     "ndp-click-trigger" == document.activeElement.getAttribute("id") || l()
                 }
             });
+            const list = Array.from(document.getElementsByClassName("ndp-nepali-calendar"));
+            if(!e.readOnlyInput){
+                list.forEach(item => {
+                    item.addEventListener('focusout', (event) => {
+                        onDateInput(event, e);
+                    })
+                })
+            }
             var v = !1
-        } else if (p.length && p.length > 0)
-            for (var f = 0; f < p.length; f++) t(p[f]);
-        else t(p)
+        } else if (that.length && that.length > 0)
+            for (var f = 0; f < that.length; f++) t(that[f]);
+        else t(that)
     }, Object.defineProperty(Object.prototype, "nepaliDatePicker", {
         enumerable: !1,
         value: nepaliDatePicker
