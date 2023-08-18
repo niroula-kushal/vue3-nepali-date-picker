@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { ref } from 'vue';
-import VNepaliDatePicker, { DatePickerLangauges } from './components/VNepaliDatePicker.vue';
+import {computed} from '@vue/reactivity';
+import {ref} from 'vue';
+import VNepaliDatePicker, {DatePickerLangauges} from './components/VNepaliDatePicker.vue';
 
 const date = ref<Date | null>(new Date());
-const nepaliDate = ref<string|null>("");
+const nepaliDate = ref<string | null>("");
 
 const minDateValue = ref<string>("2020-01-01");
-const maxDateValue = ref<string>("2023-01-01");
+const maxDateValue = ref<string>("2028-01-01");
 
 const min = computed<Date>(() => new Date(minDateValue.value));
 const max = computed<Date>(() => new Date(maxDateValue.value));
@@ -22,6 +22,7 @@ const allowClear = ref<boolean>(true);
 const yearCount = ref<number>(10);
 const language = ref<DatePickerLangauges>("nepali");
 const disabled = ref(false);
+const allowInput = ref(false);
 
 const usage = computed<string>(() => {
   let str = `
@@ -37,10 +38,11 @@ const usage = computed<string>(() => {
           :year-select="${yearSelect.value}"
           :month-select="${monthSelect.value}"
           :year-count="${yearCount.value}"
-          :max="new Date("${max.value.getFullYear()}-${max.value.getMonth()+1}-${max.value.getDate()}")" // a date instance
-          :min="new Date("${min.value.getFullYear()}-${min.value.getMonth()+1}-${min.value.getDate()}")" // a date instance
+          :max="new Date("${max.value.getFullYear()}-${max.value.getMonth() + 1}-${max.value.getDate()}")" // a date instance
+          :min="new Date("${min.value.getFullYear()}-${min.value.getMonth() + 1}-${min.value.getDate()}")" // a date instance
           :language="${language.value}"
           :disabled="${disabled.value}"
+          :allow-input="${allowInput.value}"
         >
           <template #clear-btn="{onClear}">
             <span class="clear-btn" @click.prevent="onClear">
@@ -62,7 +64,7 @@ const usage = computed<string>(() => {
       <p>
         Allow Clear: <input type="checkbox" v-model="allowClear">
         <br/>
-        <small>Allow/disallow clearing selected value. If allowClear is true, the returned date may be null. 
+        <small>Allow/disallow clearing selected value. If allowClear is true, the returned date may be null.
           <strong>
             Default: false
           </strong>
@@ -95,6 +97,18 @@ const usage = computed<string>(() => {
           </strong>
         </small>
       </p>
+
+      <p>
+        Allow Input
+        <input v-model="allowInput" type="checkbox">
+        <br/>
+        <small>Enable date input field
+          <strong>
+            Default: false
+          </strong>
+        </small>
+      </p>
+
       <p>
         Input Classes
         <input type="text" v-model="inputClasses" class="w-full">
@@ -175,7 +189,7 @@ const usage = computed<string>(() => {
         <br/>
         <small>The language used to show calendar
           <strong>
-             Default: nepali
+            Default: nepali
           </strong>
         </small>
       </p>
@@ -187,7 +201,7 @@ const usage = computed<string>(() => {
       #clear-btn {onClear : () => void} <br/>
       <small>
         Slot to render custom clear button [OPTIONAL]. <br/>
-         Call onClear to clear date
+        Call onClear to clear date
       </small>
       <textarea readonly rows="10" class="w-full">
         <template #clear-btn="{onClear}">
@@ -198,32 +212,33 @@ const usage = computed<string>(() => {
       </textarea>
     </div>
     <div class="content">
-        <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
-          :allow-clear="allowClear" 
-          :allowed-past-days="allowedPastDays" 
-          :allowed-future-days="allowedFutureDays" 
-          :input-classes="inputClasses"
-          :nepali-date-format="inputDateFormat"
-          :year-select="yearSelect"
-          :month-select="monthSelect"
-          :year-count="yearCount"
-          :max="max" 
-          :min="min"
-          :language="language"
-    :disabled="disabled"
-        >
-          <template #clear-btn="{onClear}">
+      <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
+                         :allow-clear="allowClear"
+                         :allowed-past-days="allowedPastDays"
+                         :allowed-future-days="allowedFutureDays"
+                         :input-classes="inputClasses"
+                         :nepali-date-format="inputDateFormat"
+                         :year-select="yearSelect"
+                         :month-select="monthSelect"
+                         :year-count="yearCount"
+                         :max="max"
+                         :min="min"
+                         :language="language"
+                         :allow-input="allowInput"
+                         :disabled="disabled"
+      >
+        <template #clear-btn="{onClear}">
             <span class="clear-btn" @click.prevent="onClear">
                 ❌
             </span>
-          </template>
-        </VNepaliDatePicker>
-        <h3>
-          Selected Date: {{date?.toDateString()}} AD <br/>
-          Nepali Date: {{nepaliDate}} BS
-        </h3>
-        <hr/>
-        <textarea readonly v-model="usage" class="w-full" rows="30">
+        </template>
+      </VNepaliDatePicker>
+      <h3>
+        Selected Date: {{ date?.toDateString() }} AD <br/>
+        Nepali Date: {{ nepaliDate }} BS
+      </h3>
+      <hr/>
+      <textarea readonly v-model="usage" class="w-full" rows="30">
         </textarea>
     </div>
   </div>
@@ -247,7 +262,7 @@ const usage = computed<string>(() => {
 .sidebar {
   grid-column-start: 1;
   background-color: rgb(210 210 210);
-  box-shadow: 1px 2px 6px rgba(0,0,0, .3);
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, .3);
   border-radius: 25px;
   max-height: 90vh;
   overflow: auto;
@@ -256,26 +271,30 @@ const usage = computed<string>(() => {
 }
 
 .content {
-    grid-column-start: 2;
-    padding: 10px;
-    width: 50%;
+  grid-column-start: 2;
+  padding: 10px;
+  width: 50%;
 }
 
 .w-full {
   width: 100%;
 }
 
-.mb-0 { margin-bottom: 0;}
+.mb-0 {
+  margin-bottom: 0;
+}
 
 @media screen and (max-width: 720px) {
   .grid {
     grid-template-columns: 1fr;
     grid-auto-rows: minmax(100vh, 1fr);
   }
+
   .sidebar {
     height: auto;
     min-height: max-content;
   }
+
   .content {
     grid-row-start: 2;
     grid-column-start: 1;
