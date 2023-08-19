@@ -22,7 +22,7 @@ import '../nepali-date-picker/nepali-date-picker.css';
 
 export type DatePickerLangauges = "english" | "nepali";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
     modelValue: Date | null,
     nepaliDate?: string | null,
     allowClear?: boolean,
@@ -38,7 +38,9 @@ const props = defineProps<{
     language?: DatePickerLangauges
     disabled?: boolean,
     allowInput?: boolean
-}>();
+}>(), {
+    allowInput: true
+});
 
 const emit = defineEmits<{
     (e: "update:modelValue", value: Date | null): void,
