@@ -22,7 +22,7 @@ const allowClear = ref<boolean>(true);
 const yearCount = ref<number>(10);
 const language = ref<DatePickerLangauges>("nepali");
 const disabled = ref<boolean>(false);
-const allowInput = ref<boolean>(false);
+const allowInput = ref<boolean>(true);
 
 const usage = ref<string>("");
 
@@ -70,7 +70,7 @@ watchEffect(() => {
         <br/>
         <small>Allow/disallow user input of date
           <strong>
-            Default: false
+            Default: true
           </strong>
         </small>
       </p>
