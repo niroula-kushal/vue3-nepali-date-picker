@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity';
-import { ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import VNepaliDatePicker, { DatePickerLangauges } from './components/VNepaliDatePicker.vue';
 
 const date = ref<Date | null>(new Date());
@@ -24,7 +24,10 @@ const language = ref<DatePickerLangauges>("nepali");
 const disabled = ref<boolean>(false);
 const allowInput = ref<boolean>(false);
 
-const usage = computed<string>(() => {  
+const usage = ref<string>("");
+
+
+watchEffect(() => {  
   let str = `
       const date = ref<Date | null>(new Date());
       const nepaliDate = ref<string | null>("");
@@ -51,8 +54,9 @@ const usage = computed<string>(() => {
           </template>
         </VNepaliDatePicker>
   `;
-  return str;
+  usage.value = str;
 });
+
 
 </script>
 
