@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from '@vue/reactivity';
-import { ref } from 'vue';
+import { ref, watch, watchEffect } from 'vue';
 import VNepaliDatePicker, { DatePickerLangauges } from './components/VNepaliDatePicker.vue';
 
 const date = ref<Date | null>(new Date());
 const nepaliDate = ref<string|null>("");
 
 const minDateValue = ref<string>("2020-01-01");
-const maxDateValue = ref<string>("2023-01-01");
+const maxDateValue = ref<string>("2030-01-01");
 
 const min = computed<Date>(() => new Date(minDateValue.value));
 const max = computed<Date>(() => new Date(maxDateValue.value));
@@ -21,14 +21,19 @@ const monthSelect = ref<boolean>(false);
 const allowClear = ref<boolean>(true);
 const yearCount = ref<number>(10);
 const language = ref<DatePickerLangauges>("nepali");
-const disabled = ref(false);
+const disabled = ref<boolean>(false);
+const allowInput = ref<boolean>(false);
 
-const usage = computed<string>(() => {
+const usage = ref<string>("");
+
+
+watchEffect(() => {  
   let str = `
       const date = ref<Date | null>(new Date());
       const nepaliDate = ref<string | null>("");
 
       <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
+          :allow-input="${allowInput.value}"
           :allow-clear="${allowClear.value}" 
           :allowed-past-days="${allowedPastDays.value}" 
           :allowed-future-days="${allowedFutureDays.value}" 
@@ -49,8 +54,9 @@ const usage = computed<string>(() => {
           </template>
         </VNepaliDatePicker>
   `;
-  return str;
+  usage.value = str;
 });
+
 
 </script>
 
@@ -59,6 +65,15 @@ const usage = computed<string>(() => {
     <div class="sidebar">
       <h1 class="mb-0">Props</h1>
       <hr>
+      <p>
+        Allow Input: <input type="checkbox" v-model="allowInput" />
+        <br/>
+        <small>Allow/disallow user input of date
+          <strong>
+            Default: false
+          </strong>
+        </small>
+      </p>
       <p>
         Allow Clear: <input type="checkbox" v-model="allowClear">
         <br/>
@@ -199,6 +214,7 @@ const usage = computed<string>(() => {
     </div>
     <div class="content">
         <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
+          :allow-input="allowInput"
           :allow-clear="allowClear" 
           :allowed-past-days="allowedPastDays" 
           :allowed-future-days="allowedFutureDays" 
@@ -210,7 +226,7 @@ const usage = computed<string>(() => {
           :max="max" 
           :min="min"
           :language="language"
-    :disabled="disabled"
+        :disabled="disabled"
         >
           <template #clear-btn="{onClear}">
             <span class="clear-btn" @click.prevent="onClear">
