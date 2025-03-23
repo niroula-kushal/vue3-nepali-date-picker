@@ -1,6 +1,6 @@
 {
   "name": "vue-nepali-date-picker",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "files": [
     "dist"
@@ -24,6 +24,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RehmatFalcon/vue3-nepali-date-picker.git"
+    "url": "https://github.com/niroula-kushal/vue3-nepali-date-picker.git"
   }
 }
