@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from '@vue/reactivity';
-import { ref, watch, watchEffect } from 'vue';
+import { ref, watch, watchEffect, computed } from 'vue';
 import VNepaliDatePicker, { DatePickerLangauges } from './components/VNepaliDatePicker.vue';
 
 const date = ref<Date | null>(new Date());
@@ -27,16 +26,16 @@ const allowInput = ref<boolean>(true);
 const usage = ref<string>("");
 
 
-watchEffect(() => {  
+watchEffect(() => {
   let str = `
       const date = ref<Date | null>(new Date());
       const nepaliDate = ref<string | null>("");
 
       <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
           :allow-input="${allowInput.value}"
-          :allow-clear="${allowClear.value}" 
-          :allowed-past-days="${allowedPastDays.value}" 
-          :allowed-future-days="${allowedFutureDays.value}" 
+          :allow-clear="${allowClear.value}"
+          :allowed-past-days="${allowedPastDays.value}"
+          :allowed-future-days="${allowedFutureDays.value}"
           :input-classes="${inputClasses.value}"
           :nepali-date-format="${inputDateFormat.value}"
           :year-select="${yearSelect.value}"
@@ -77,7 +76,7 @@ watchEffect(() => {
       <p>
         Allow Clear: <input type="checkbox" v-model="allowClear">
         <br/>
-        <small>Allow/disallow clearing selected value. If allowClear is true, the returned date may be null. 
+        <small>Allow/disallow clearing selected value. If allowClear is true, the returned date may be null.
           <strong>
             Default: false
           </strong>
@@ -215,15 +214,15 @@ watchEffect(() => {
     <div class="content">
         <VNepaliDatePicker v-model="date" v-model:nepali-date="nepaliDate"
           :allow-input="allowInput"
-          :allow-clear="allowClear" 
-          :allowed-past-days="allowedPastDays" 
-          :allowed-future-days="allowedFutureDays" 
+          :allow-clear="allowClear"
+          :allowed-past-days="allowedPastDays"
+          :allowed-future-days="allowedFutureDays"
           :input-classes="inputClasses"
           :nepali-date-format="inputDateFormat"
           :year-select="yearSelect"
           :month-select="monthSelect"
           :year-count="yearCount"
-          :max="max" 
+          :max="max"
           :min="min"
           :language="language"
         :disabled="disabled"
